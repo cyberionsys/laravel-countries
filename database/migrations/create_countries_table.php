@@ -1,12 +1,15 @@
 <?php
 
 use Cyberionsys\Countries\Models\Country;
+use Cyberionsys\Countries\Traits\HasJsonData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use HasJsonData;
+
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
@@ -37,7 +40,7 @@ return new class extends Migration
         // Now seed it
         Country::unguard();
 
-        $countries = collect(json_decode(file_get_contents(__DIR__.'/../../data/countries-v2.json'), true));
+        $countries = $this->get_json_data('countries-v2.json');
         $locales = collect(config('app.locale'))
             ->merge(config('app.fallback_locale'))
             ->merge(config('countries.locales'))
@@ -73,7 +76,7 @@ return new class extends Migration
             }
         }
 
-        $countries = collect(json_decode(file_get_contents(__DIR__.'/../../data/countries-v3.1.json'), true));
+        $countries = $this->get_json_data('countries-v3.1.json');
 
         foreach ($countries as $country) {
             Country::find($country['cca2'])->update([

@@ -1,6 +1,7 @@
 <?php
 
 use Cyberionsys\Countries\Models\Language;
+use Cyberionsys\Countries\Traits\HasJsonData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,6 +9,8 @@ use Illuminate\Support\Fluent;
 
 return new class extends Migration
 {
+    use HasJsonData;
+
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
@@ -23,7 +26,7 @@ return new class extends Migration
         // Seed
         Language::unguard();
 
-        $languages = collect(json_decode(file_get_contents(__DIR__.'/../../data/languages.json'), true));
+        $languages = $this->get_json_data('languages.json');
         $locales = collect(config('app.locale'))
             ->merge(config('app.fallback_locale'))
             ->merge(config('iso-countries.locales'))

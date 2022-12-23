@@ -1,12 +1,15 @@
 <?php
 
 use Cyberionsys\Countries\Models\Currency;
+use Cyberionsys\Countries\Traits\HasJsonData;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use HasJsonData;
+
     public function up()
     {
         Schema::create('currencies', function (Blueprint $table) {
@@ -22,7 +25,7 @@ return new class extends Migration
         // Seed it
         Currency::unguard();
 
-        $currencies = collect(json_decode(file_get_contents(__DIR__.'/../../data/currencies.json'), true));
+        $currencies = $this->get_json_data('currencies.json');
         $locales = collect(config('app.locale'))
             ->merge(config('app.fallback_locale'))
             ->merge(config('iso-countries.locales'))
