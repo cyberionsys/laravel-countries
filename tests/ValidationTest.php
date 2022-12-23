@@ -44,8 +44,8 @@ it('contains correct model relationships', function () {
     $this->assertEqualsCanonicalizing($country->neighbours->pluck('id')->toArray(), ['DE', 'FR', 'BE']);
 });
 
-it('it has the expected amount of countries')->assertDatabaseCount('countries', 250);
+it('has the expected amount of countries')->assertDatabaseCount('countries', 250);
 
-it('it has the expected amount of languages')->assertDatabaseCount('languages', 184);
+it('has the expected amount of languages')->assertDatabaseCount('languages', 183);
 
-it('it has the expected amount of currencies')->assertDatabaseCount('currencies', 139);
+it('has the expected amount of currencies')->assertDatabaseCount('currencies', 138);

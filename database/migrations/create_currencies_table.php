@@ -31,6 +31,18 @@ return new class extends Migration
             ->merge(config('iso-countries.locales'))
             ->unique();
 
+        $translations = [];
+        foreach ($locales as $locale) {
+            $file = base_path("vendor/umpirsky/currency-list/data/$locale/currency.php");
+
+            if (! file_exists($file)) {
+                continue;
+            }
+
+            $trans = require $file;
+            $translations[$locale] = $trans;
+        }
+
         foreach ($currencies as $code => $currency) {
             $c = Currency::create([
                 'id' => $code,
@@ -43,16 +55,8 @@ return new class extends Migration
             ]);
 
             foreach ($locales as $locale) {
-                $file = base_path("vendor/umpirsky/currency-list/data/$locale/currency.php");
-
-                if (! file_exists($file)) {
-                    continue;
-                }
-
-                $translations = require $file;
-
-                foreach ($translations as $id => $name) {
-                    $c->setTranslation('name', $locale, $name)->saveQuietly();
+                if (! empty($translations[$locale][$code])) {
+                    $c->setTranslation('name', $locale, $translations[$locale][$code])->saveQuietly();
                 }
             }
         }

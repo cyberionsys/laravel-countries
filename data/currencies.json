@@ -1025,15 +1025,6 @@
         "code": "STD",
         "name_plural": "Sao Tomean Dobra"
     },
-    "STN": {
-        "symbol": "Db",
-        "name": "Sao Tomean Dobra",
-        "symbol_native": "Db",
-        "decimal_digits": 0,
-        "rounding": 0,
-        "code": "STN",
-        "name_plural": "Sao Tomean Dobra"
-    },
     "SYP": {
         "symbol": "SY£",
         "name": "Syrian Pound",

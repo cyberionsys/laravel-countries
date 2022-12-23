@@ -32,6 +32,19 @@ return new class extends Migration
             ->merge(config('iso-countries.locales'))
             ->unique();
 
+        $translations = [];
+        foreach ($locales as $locale) {
+            $file = base_path("vendor/umpirsky/language-list/data/$locale/language.php");
+
+            if (! file_exists($file)) {
+                continue;
+            }
+
+            $trans = require $file;
+
+            $translations[$locale] = $trans;
+        }
+
         foreach ($languages as $language) {
             $language = new Fluent($language);
 
@@ -46,16 +59,8 @@ return new class extends Migration
             ]);
 
             foreach ($locales as $locale) {
-                $file = base_path("vendor/umpirsky/language-list/data/$locale/language.php");
-
-                if (! file_exists($file)) {
-                    continue;
-                }
-
-                $translations = require $file;
-
-                foreach ($translations as $id => $name) {
-                    $l->setTranslation('name', $locale, $name)->saveQuietly();
+                if (! empty($translations[$locale][$l->id])) {
+                    $l->setTranslation('name', $locale, $translations[$locale][$l->id])->saveQuietly();
                 }
             }
         }
