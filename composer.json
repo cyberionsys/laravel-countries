@@ -1,24 +1,41 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "cyberionsys/laravel-countries",
+    "description": "A database with ISO country information in all configured translations ",
     "keywords": [
-        ":vendor_name",
+        "cyberionsys",
         "laravel",
-        ":package_slug"
+        "laravel-countries",
+        "country-codes",
+        "languages",
+        "currencies",
+        "countries",
+        "iso",
+        "codes",
+        "world",
+        "php",
+        "eloquent",
+        "cast",
+        "custom-casts",
+        "iso3166",
+        "iso639-1",
+        "iso4217"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/cyberionsys/laravel-countries",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Cyberion Systems",
+            "email": "contact@cyberionsys.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
+        "illuminate/contracts": "^9.0",
         "spatie/laravel-package-tools": "^1.13.0",
-        "illuminate/contracts": "^9.0"
+        "spatie/laravel-translatable": "^6.2",
+        "umpirsky/currency-list": "^1.1",
+        "umpirsky/language-list": "^1.1"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -35,13 +52,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Cyberionsys\\Countries\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Cyberionsys\\Countries\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -61,11 +77,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
-            }
+                "Cyberionsys\\Countries\\CountriesServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
