@@ -31,7 +31,7 @@ class Country extends BaseModel
         return $this->belongsToMany(Country::class, 'country_country', 'country_id', 'neighbour_id');
     }
 
-    public function resolveRouteBinding($value, $field = null): Model|null
+    public function resolveRouteBinding($value, $field = null): ?Model
     {
         return parent::resolveRouteBinding(strtoupper($value), $field);
     }

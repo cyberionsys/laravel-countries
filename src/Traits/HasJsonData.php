@@ -10,7 +10,6 @@ trait HasJsonData
     /**
      * Get Json source Data
      *
-     * @param  string  $json_file
      * @return array
      *
      * @throws FileNotFoundException

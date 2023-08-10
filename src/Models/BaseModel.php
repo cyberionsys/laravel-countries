@@ -26,8 +26,6 @@ abstract class BaseModel extends Model
 
     /**
      * Gets the name of the model in slug format
-     *
-     * @return string
      */
     public function getSlugAttribute(): string
     {

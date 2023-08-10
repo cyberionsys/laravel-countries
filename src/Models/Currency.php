@@ -12,7 +12,7 @@ class Currency extends BaseModel
         return $this->belongsToMany(Country::class);
     }
 
-    public function resolveRouteBinding($value, $field = null): Model|null
+    public function resolveRouteBinding($value, $field = null): ?Model
     {
         return parent::resolveRouteBinding(strtoupper($value), $field);
     }
